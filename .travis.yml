@@ -4,4 +4,16 @@ services:
 before_install:
   - docker build -t seb7887/awsreact -f ./frontend/Dockerfile.dev ./frontend
 script:
-  - docker run seb7887/awsreact npm test --coverage
+  - docker run seb7887/awsreact npm test -- --coverage
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: awsreact
+  env: Awsreact-env
+  bucket_name: elasticbeanstalk-us-east-2-130624955457
+  bucket_path: awsreact
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
