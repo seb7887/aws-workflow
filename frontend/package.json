@@ -14,7 +14,9 @@
     "eject": "react-scripts eject",
     "docker:build:dev": "docker build -f Dockerfile.dev -t awsreact .",
     "docker:run:dev": "docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app awsreact",
-    "docker:dev": "npm run docker:build:dev && npm run docker:run:dev"
+    "docker:dev": "npm run docker:build:dev && npm run docker:run:dev",
+    "compose:dev": "docker-compose up",
+    "docker:test": "docker run awsreact CMD[\"npm\", \"run\", \"test\"]"
   },
   "eslintConfig": {
     "extends": "react-app"
