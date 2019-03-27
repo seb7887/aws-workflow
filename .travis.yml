@@ -1,0 +1,7 @@
+sudo: required
+services:
+  - docker
+before_install:
+  - docker build -t seb7887/awsreact -f ./frontend/Dockerfile.dev ./frontend
+script:
+  - docker run seb7887/awsreact npm test --coverage
