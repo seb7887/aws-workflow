@@ -1,0 +1,25 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "docker:build:dev": "docker build -f Dockerfile.dev -t server .",
+    "docker:run:dev": "docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app server",
+    "docker:dev": "npm run docker:build:dev && npm run docker:run:dev"
+  },
+  "author": "seb7887",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "pg": "^7.9.0",
+    "redis": "^2.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}

@@ -2,18 +2,21 @@ sudo: required
 services:
   - docker
 before_install:
-  - docker build -t seb7887/awsreact -f ./frontend/Dockerfile.dev ./frontend
+  - docker build -t seb7887/awsreact -f ./client/Dockerfile.dev ./client
 script:
   - docker run seb7887/awsreact npm test -- --coverage
-deploy:
-  provider: elasticbeanstalk
-  region: us-east-2
-  app: awsreact
-  env: Awsreact-env
-  bucket_name: elasticbeanstalk-us-east-2-130624955457
-  bucket_path: awsreact
-  on:
-    branch: master
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key:
-    secure: $AWS_SECRET_KEY
+
+after_sucess:
+  - docker build -t seb7887/awsreact-client ./client
+  - docker build -t seb7887/awsreact-nginx ./nginx
+  - docker build -t seb7887/awsreact-server ./server
+  - docker build -t seb7887/awsreact-worker ./worker
+
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  # Push images to the docker hub
+  - docker push seb7887/awsreact-client
+  - docker push seb7887/awsreact-nginx
+  - docker push seb7887/awsreact-server
+  - docker push seb7887/awsreact-worker

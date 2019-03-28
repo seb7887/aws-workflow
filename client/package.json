@@ -1,10 +1,12 @@
 {
-  "name": "frontend",
+  "name": "client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
+    "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8"
   },
   "scripts": {
@@ -12,11 +14,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "docker:build:dev": "docker build -f Dockerfile.dev -t awsreact .",
-    "docker:run:dev": "docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app awsreact",
-    "docker:dev": "npm run docker:build:dev && npm run docker:run:dev",
-    "compose:dev": "docker-compose up",
-    "docker:test": "docker run awsreact CMD[\"npm\", \"run\", \"test\"]"
+    "docker:build:dev": "docker build -f Dockerfile.dev -t client .",
+    "docker:run:dev": "docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app client",
+    "docker:dev": "npm run docker:build:dev && npm run docker:run:dev"
   },
   "eslintConfig": {
     "extends": "react-app"
