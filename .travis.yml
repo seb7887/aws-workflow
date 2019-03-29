@@ -28,7 +28,7 @@ deploy:
   region: us-east-2
   app: awsreact
   env: Awsreact-env
-  bucket_name:
+  bucket_name: elasticbeanstalk-us-east-2-130624955457
   bucket_path: awsreact
   on:
     branch: master
